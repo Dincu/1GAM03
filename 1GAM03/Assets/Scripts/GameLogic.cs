@@ -153,14 +153,15 @@ public class GameLogic : MonoBehaviour {
         {
             if(Player.timeScore > PlayerPrefs.GetFloat("Record" + i))
             {
-                for (int j = i + 1; j <= storeNScores; j++)
+                for (int j = storeNScores; j >= i; j--)
                 {
-                    PlayerPrefs.SetFloat("Record" + j, PlayerPrefs.GetFloat("Record" + (j-1)));
-                    PlayerPrefs.SetString("Name" + j, PlayerPrefs.GetString("Name" + (j-1)));
+                    PlayerPrefs.SetFloat("Record" + (j+1), PlayerPrefs.GetFloat("Record" + j));
+                    PlayerPrefs.SetString("Name" + (j+1), PlayerPrefs.GetString("Name" + j));
                 }
 
                 PlayerPrefs.SetFloat("Record" + i, Player.timeScore);
                 PlayerPrefs.SetString("Name" + i, Player.playerName);
+                break;
             }
         }
 
